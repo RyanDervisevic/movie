@@ -1,0 +1,9 @@
+extends layout
+block content
+	h1 Nos Users
+	each user in users
+		a(href=`/api/v1/${user.id}/`)
+			.card
+				.card-header
+					.card-title.h5=user.login
+					.card-body=foodtruck.prenom

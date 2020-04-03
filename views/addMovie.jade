@@ -1,0 +1,23 @@
+extends layout
+block content
+	div(class="col-xs-10 col-sm-5")
+		form(action="/api/addMovie", method="post")
+			div(class="form-group")
+				label(for="imdbID")='imdbID :'
+				input(type="text", class="form-control", name="imdbID", value=`${movie.imdbID}`)
+				label(for="title")='Title :'
+				input(type="text", class="form-control", name="title", value=`${movie.title}`)
+				label(for="genre")='Genre :'
+				input(type="text", class="form-control", name="genres", value=`${movie.genres}`)
+				label(for="poster")='Poster :'
+				input(type="text", class="form-control", name="poster", value=`${movie.poster}`)
+				label(for="rating")='Rating :'
+				input(type="text", class="form-control", name="imdbRating", value=`${movie.imdbRating}`)
+				label(for="summary")='Summary :'
+				input(type="text", class="form-control", name="summary", value=`${movie.summary}`)
+				label(for="directors")='With :'
+				input(type="text", class="form-control", name="directors", value=`${movie.directors}`)
+				label(for="trailer")='Trailer :'
+				input(type="text", class="form-control", name="trailer", value=`${movie.trailer}`)
+				br
+				button(type=submit class="btn btn-success") Add To DB

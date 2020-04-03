@@ -1,0 +1,51 @@
+extends layout
+block content
+  button(class="btn btn-default", onClick="validate()")='test'
+  div(class="col-xs-10 col-sm-5")
+    h1=movie.title
+    h5
+      small=movie.genres
+    img(src=movie.poster, class="img-responsive", alt="Responsive image", height="45%", width="45%")
+    div(class="col-xs-6 col-sm-10")
+      h3(class="text-left")='Summary :'
+        div(class="col-xs-6 col-sm-10")
+          h5=movie.summary
+    div(class="col-xs-10 col-sm-10")
+      table 
+        tr
+          td
+            h3(class="text-left")='With :'
+              div(class="col-xs-6 col-sm-10")
+                h5=movie.directors
+          td
+            h3
+              span(class="glyphicon glyphicon-star",class="col-md-4 col-md-offset-4", aria-hidden="true")=movie.imdbRating
+                small='/10'
+          td
+          td
+          td
+        tr
+          td
+          td
+          td
+            a(href=`/api/addMovie/${movie.imdbID}`, class="col-md-4 col-md-offset-4")
+              button(type="submit", class="btn btn-success")='Add'
+          td
+            a(href=``, class="col-md-4 col-md-offset-4")
+              button(type="submit", class="btn btn-warning")='Update'
+          td
+            a(href=`/api/remove/${movie.imdbID}`, class="col-md-4 col-md-offset-4")
+              button(type="submit", class="btn btn-danger")='Delete'
+    input(id="urlUpdate", type="hidden", value=`/api/editMovie/${movie.imdbID}`)      
+    input(id="imdbIDHidden", type="hidden", value=`${movie.imdbID}`)
+  script 
+    | if(window.location.href == 'http://localhost:4500/api/remove/'+document.getElementById('imdbIDHidden').value){alert("The movie is delete")}else if(window.location.href == 'http://localhost:4500/api/editMovie/'+document.getElementById('imdbIDHidden').value){alert("The movie is update")}
+  script
+    | var url =document.getElementById('urlUpdate').value); alert(url);
+    //- | function validate() {
+    //- |    var url =document.getElementById('urlUpdate').value); alert(url);
+    //- |    var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    //- |    if (pattern.test(url)) {
+    //- |        alert("Url is valid");
+    //- |    } 
+    //- |        alert("Url is not valid!");}

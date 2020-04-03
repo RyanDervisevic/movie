@@ -1,0 +1,20 @@
+extends layout
+block content
+	.form-group
+		div(class="col-xs-10 col-sm-5")
+			form(action=`#`, method="post")
+				div(class="form-group")
+					label(for="title")='Title :'
+					input(type="text" class="form-control",name="title", value= movie.title)
+					label(for="genre")='Genre :'
+					input(type="text" class="form-control",name="genre", value= movie.genres)
+					label(for="poster")='Poster :'
+					input(type="text" class="form-control",name="poster", value= movie.poster)
+					label(for="rating")='Rating :'
+					input(type="text" class="form-control",name="rating", value= movie.imdbRating)
+					label(for="summary")='Summary :'
+					input(type="text" class="form-control",name="summary", value= movie.summary)
+					label(for="directors")='With :'
+					input(type="text" class="form-control",name="with", value= movie.directors)
+					br
+					button(type="submit", class="btn btn-warning")='Modifier'

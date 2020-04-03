@@ -1,0 +1,14 @@
+extends layout
+block content
+  h1 Nos Movies
+  form(action="#", method="post")
+    button(type=submit class="btn btn-success") Add To DB
+  div(class="col-xs-10 col-sm-5")
+    table(class="table table-striped")
+      each movie in movies
+        tr
+          td
+            a(href=`/api/movie/${movie.imdbID}`)
+              img(src=movie.poster, class="img-responsive", alt="Responsive image")
+          td
+            a(href=`/api/movie/${movie.imdbID}`)=movie.title
