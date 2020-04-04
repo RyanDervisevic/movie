@@ -1,13 +1,12 @@
 extends layout
 block content
-  h1= user.prenom +" "+ user.nom
-    //p=user.prenom user.nom
+  h1= Search
   div(class="col-lg-6")
     div(class="input-group")
-      form(action=`/api/search/`, method="get")
-        input(type="text", name="searchTest", class="form-control", placeholder="Search for...")
-        span(class="input-group-btn")
-          button(class="btn btn-default" type="submit")
-            span(class="glyphicon glyphicon-search", aria-hidden="true")
-          a(href=``)
-        
+      input(type="text", id="searchTest", class="form-control", placeholder="Search for...")
+      span(class="input-group-btn")
+        button(class="btn btn-default", id="setLink", onClick="Affiche()")
+          span(class="glyphicon glyphicon-search", aria-hidden="true")
+    script
+      | document.getElementById("setLink").onclick = function() {window.location.href= 'http://localhost:4500/api/search/' + document.getElementById("searchTest").value;};
+      

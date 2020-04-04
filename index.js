@@ -14,30 +14,10 @@ db.once('open', () => {
 })
 
 app.use(cors());
-
+//L'index renvoie sur la recherche de film (vu que je n'ai pas reussi la connexion)
 app.get('/', (req, res) => {
-  res.json({
-    message: 'Scraping is Fun!'
-  });
+  res.render('home');
 });
-
-app.get('/search/:title', (req, res) => {
-  scraper
-    .searchMovies(req.params.title)
-    .then(movies => {
-      res.json(movies);
-    });
-});
-
-app.get('/movie/:imdbID', (req, res) => {
-  scraper
-    .getMovie(req.params.imdbID)
-    .then(movie => {
-      res.json(movie);
-    });
-});
-
-// test API IMDB
 
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');

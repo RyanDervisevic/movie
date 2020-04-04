@@ -29,13 +29,12 @@ api.post('/connexion', (req,res)=> {
       res.render('home', {user:user});
 	})
 })
-api.get('/home/:login', (req,res)=>{
-  const leLogin = req.params.login;
-  User.findOne({login : leLogin}, (err,user) => {
-    if(err) console.error(err)
-    res.render('home', {user:user});
-  });
+api.get('/home/', (req,res)=>{
+  
+    res.render('home');
+
 });
+// renvoie sur la page des réusltats d'une recherche de film 
 api.get('/search/:title', (req,res)=> {
   scraper
     .searchMovies(req.params.title)
@@ -58,6 +57,7 @@ api.post('/search/:title', (req,res)=> {
     });
   });
 });
+// Renvoie sur la page des details du film 
 api.get('/movie/:imdbID', (req, res) => {
   scraper
     .getMovie(req.params.imdbID)
@@ -65,6 +65,7 @@ api.get('/movie/:imdbID', (req, res) => {
       res.render('movie', {movie : movie});
     });
 });
+// Renvoie sur la page d'ajout de film en récuperant les données d'imdb
 api.get('/addMovie/:imdbID', (req,res) => {
   scraper
     .getMovie(req.params.imdbID)
@@ -72,6 +73,7 @@ api.get('/addMovie/:imdbID', (req,res) => {
       res.render('addMovie', {movie : movie});
   });
 });
+// Envoie les données pour ajouter un film dans la base de données 
 api.post('/addMovie', (req,res) => {
   const newMovie = new Movie(req.body)
   newMovie.save((err, movie) => {
@@ -79,50 +81,34 @@ api.post('/addMovie', (req,res) => {
     res.render('movie', {movie:movie});
   });
 });
-api.post('/movie/:imdbID', (req, res) => {
-  scraper
-    .getMovie(req.params.imdbID)
-    .then(movie => {
-      res.json(movie);
-    });
-});
-api.get('/all', (req,res)=> {
-    Movie.find({}, (err,movies) => {
-    if(err) console.error(err)
-    res.render('movies',{movies: movies});
-  })
-})
-
+// Renvoie sur la page pour modifier le film de la bdd 
 api.get('/editMovie/:imdbID', (req,res) => {
   scraper
     .getMovie(req.params.imdbID)
     .then(movie => {
-  const id = req.params.imdbID;
-
+  const id = movie.id;
   Movie.findOne({imdbID : id}, (err, movie) => {
-  if(err) console.error(err)
-  console.log(movie.imdbID +"="+movie.imdbID);
-  res.render('editMovie', {movie : movie});
+    res.render('editMovie', {movie : movie});
   });
   });
-});
-
+  });
+// Envoie les donnée à modifier du film dans la bdd
 api.post('/editMovie/:imdbID', (req,res) => {
   const id = req.params.imdbID;
   Movie.findOne({imdbID : id}, (err, movie) => {
    if(err) console.error(err)
    Object.assign(movie, req.body).save((err, movie) => {
-     if(err) console.error(err)
      res.render('movie', {movie,movie});
-   })
- })
-})
+   });
+ });
+});
+// Suprime le film de la Base de données
 api.get('/remove/:imdbID', (req,res)=> {
   const id = req.params.imdbID;
   Movie.findOneAndDelete({imdbID : id}, (err, movie) => {
     if(err) console.error(err)
     res.render('movie', {movie:movie});
-  })
-})
+  });
+});
 
 module.exports = api;

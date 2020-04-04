@@ -6,16 +6,8 @@ block content
 		form(class="form-horizontal", action="/api/home", method="get")
 			label(for="login", class="col-sm-2 control-label")=Login
 			input(type="test", name="login", class="form-control", placeholder="login")
+			label(for="inputPassword3", class="col-sm-2 control-label")=Password
+			input(type="password", class="form-control", id="inputPassword3", placeholder="Password")
 			button(type="button", class="btn btn-success")='Sign in'
 		//- script
 		//- 	| function getLogin() { var leLien='/api/home/?login='; var leLogin = document.getElementById("login").value; document.forms.action = leLien+leLogin; document.forms["connexion"].submit();}
-		
-		//- 		br
-		//- div(class="form-group")
-		//- 	label(for="inputPassword3", class="col-sm-2 control-label")=Password
-		//- 	div(class="col-sm-10")
-		//- 		input(type="password", class="form-control", id="inputPassword3", placeholder="Password")
-		//- 		br
-	
-			
-		

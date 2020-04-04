@@ -4,7 +4,7 @@ block content
 		form(action="/api/addMovie", method="post")
 			div(class="form-group")
 				label(for="imdbID")='imdbID :'
-				input(type="text", class="form-control", name="imdbID", value=`${movie.imdbID}`)
+				input(type="text", class="form-control", name="imdbID", value=`${movie.imdbID}`, disabled)
 				label(for="title")='Title :'
 				input(type="text", class="form-control", name="title", value=`${movie.title}`)
 				label(for="genre")='Genre :'
